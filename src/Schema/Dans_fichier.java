@@ -42,14 +42,16 @@ public class Dans_fichier {
 		}
 		return 0;
 	}*/
-	
+	// is Id pour distinguer le premier ligne est le clé primaire ou pas;
 	public int supp(String nomDeFichier,String[] strs, boolean isId) {
 		//queryFile = new QueryFile();
 		//writeFile = new WriteFile();
 		String[] ramStrs = new String[100];		//size100
 		int resultDelete;
 		String[] tempDelete;
+		//recupere tous tuples
 		ramStrs = tousTuples(nomDeFichier);
+		//si le prémier attribut est clé primaire;
 		if(isId) {
 			int j = 0;
 			while(true) {
@@ -57,6 +59,7 @@ public class Dans_fichier {
 					resultDelete = -1;
 					break;
 				}
+				// recupere la ligne qu'on vas supprimer sous forme de tableau de chaine de caractères
 				tempDelete = ramStrs[j].split(" ");
 				if(strs[0].equals(tempDelete[0])) {
 					resultDelete = j;
@@ -64,10 +67,10 @@ public class Dans_fichier {
 				}
 				j++;
 			}
-		}else {
+		} else {
 			int j = 0;
 			while(true) {
-				if(ramStrs[j] == null) {
+				if(ramStrs[j] == null){
 					resultDelete = -1;
 					break;
 				}
@@ -81,6 +84,7 @@ public class Dans_fichier {
 		}
 		if(resultDelete != -1) {
 			ramStrs[resultDelete] = "";
+			//stocker les données dans les fichiers sans la ligne qu'on a déja supprimé
 			for(int j = 0; ramStrs[j] != null && j < 100; j++) {
 				if( ! "".equals(ramStrs[j])) {
 					if(j == 0 || (j == 1 && "".equals(ramStrs[0]))) {	/// BUG DELETE the first line
@@ -92,12 +96,11 @@ public class Dans_fichier {
 			}
 		}else {
 			return -1;
-		}
-		// feedBack("DELETE");
-		return 0;						//temporary
+		}		
+		return 0;						
 	}
-	
-	public String[] tousTuples(String nomDeFichier) {							//SHOW command
+	//recupére tous les lignes dans le fichier sous formes de tableau de chanes de caractère
+	public String[] tousTuples(String nomDeFichier) {							
 		int resultCount = 0;
 		String[] strs = new String[100];//size: 100 members
 		FileReader fileReader = null;
@@ -130,8 +133,6 @@ public class Dans_fichier {
 			System.out.println("< 0 result(s).>");	
 			return null;
 		}else {
-//			String[] resultStrs = cutStringArrays(strs);
-//			System.out.println("< "+resultStrs.length+" result(s).>");
 			return strs;
 		}
 	}

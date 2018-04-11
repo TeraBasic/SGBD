@@ -9,10 +9,10 @@ public class Test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Dans_fichier testFichier = new Dans_fichier();
-		//String first = "204 LI Yi Grenoble";
-		//testFichier.add("fichier1", first, true);
-		String[] str = {"204"};
-		testFichier.supp("fichier1",str, true);
+		String first = "204 LI Yi Grenoble";
+		testFichier.add("fichier2", first, true);
+		//String[] str = {"203"};
+		//testFichier.supp("fichier1",str, true);
 
 	}
 
